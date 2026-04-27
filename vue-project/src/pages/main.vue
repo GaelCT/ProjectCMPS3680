@@ -11,12 +11,30 @@
     </div>
 
     <div class="textplate">
-        <textarea name="mainText" id="">
-            
+        <span class="icon">+</span>
+        <textarea
+        v-model="message" 
+        name="mainText" 
+        id="" 
+        rows="5" 
+        cols="33">
+            Text here...
         </textarea>
     </div>
         
 </template>
-<stype scoped>
+<style scoped>
 
-</stype>
+.textplate{
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid #ddd;
+    padding: 8px; 
+}
+
+.icon{
+    margin-right: 10px;
+    margin-top: 4px;
+}
+
+</style>
