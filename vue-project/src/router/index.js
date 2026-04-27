@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Main from '@/pages/main.vue'
 import SignUp from '@/pages/signUp.vue'
-import LoginPage from '@/page/loginPage.vue'
+import LoginPage from '@/pages/login.vue'
 
 
 const router = createRouter({

@@ -52,5 +52,3 @@ const signUp = async() => {
     </div>
 </template>
 
-
-<!-- Some how add the mysql to be connected to the login.  -->
