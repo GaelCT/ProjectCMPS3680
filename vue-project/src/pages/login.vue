@@ -26,7 +26,7 @@ const logIn = () => {
 <template>
     <div class="container">
         <h1>Log In!</h1>
-        <form a="logIn">
+        <form @submit.prevent="logIn">
             <label for="email">Email: </label>
             <input v-model="email"><br>
             <label for="password">Password: </label>
@@ -34,6 +34,8 @@ const logIn = () => {
 
             <button type="submit">Log in!</button>
 
+            <h2>Don't have an account?</h2>
+                <button type="button" @click="$router.push('/signUp')" class="SignUp"> Sign Up </button>
         </form>
     </div>
         
