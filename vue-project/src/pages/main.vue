@@ -33,6 +33,7 @@ html, body {
    width: 100%;
    background-color: #1a1a1a !important;
 }
+
 </style>
 
 <style scoped>
