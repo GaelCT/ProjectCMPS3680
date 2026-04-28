@@ -9,6 +9,13 @@ if shift and enter then not enter.
 
 
 <div class="container">
+    <div class="profileLayout">
+        <!-- This is where the profile will start -->
+        
+    </div>
+
+    
+
    <div class="textplate">
         <span class="icon">+</span>
         <textarea
@@ -18,6 +25,11 @@ if shift and enter then not enter.
         cols="33"
         placeholder="Text here...">
         </textarea> <!-- can the error go away-->
+        
+        <div class="search">
+        <input type="text" placeholder="Search...">
+        <!-- pull js search into here-->
+    </div>
     </div>
 </div>
 
@@ -65,6 +77,8 @@ html, body {
     max-width: 600px;
     transition: border-color 0.3s;
     background-color: #2a2a2a; 
+    position: absolute;
+    top: 80%;
 }
 
 textarea {
@@ -84,6 +98,15 @@ textarea {
     font-size: 1.5rem;
     margin-right: 10px;
     cursor: pointer;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-color: #2a2a2a;
+    color: white;
 }
 
 
