@@ -25,14 +25,14 @@ const logIn = () => {
 
 <template>
     <div class="container">
-        <h1>Log In!</h1>
+        <h1>Log In</h1>
         <form @submit.prevent="logIn">
             <label for="email">Email: </label>
             <input v-model="email"><br>
             <label for="password">Password: </label>
             <input v-model="password"><br>
 
-            <button type="submit">Log in!</button>
+            <button type="submit">Log in</button>
 
             <h2>Don't have an account?</h2>
                 <button type="button" @click="$router.push('/signUp')" class="SignUp"> Sign Up </button>
