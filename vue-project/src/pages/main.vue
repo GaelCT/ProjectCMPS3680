@@ -17,7 +17,7 @@ if shift and enter then not enter.
         rows="2" 
         cols="33"
         placeholder="Text here...">
-        </textarea>
+        </textarea> <!-- can the error go away-->
     </div>
 </div>
 
