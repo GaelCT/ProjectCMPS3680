@@ -5,7 +5,9 @@ listA = []; //replace with DB entry
 //event listener for the enter key
 function enter() {
     let value = document.getElementById("mainText").value
-    // somehting about value and appending it to the list. 
+    listA.push(value);
+    value = '';
+    //reset it for next text
     // console.log("enter");
 } 
 
