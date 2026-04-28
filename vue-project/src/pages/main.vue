@@ -7,9 +7,6 @@ if shift and enter then not enter.
 
 <template>
 
-    <div class="navbar">
-
-    </div>
 
 <div class="container">
    <div class="textplate">
@@ -26,6 +23,18 @@ if shift and enter then not enter.
 
 </template>
 
+
+<style>
+
+html, body {
+   margin: 0;
+   padding: 0;
+   height: 100%;
+   width: 100%;
+   background-color: #1a1a1a !important;
+}
+</style>
+
 <style scoped>
 * {
    margin: 0;
@@ -33,12 +42,8 @@ if shift and enter then not enter.
    box-sizing: border-box;
 }
 
-html, body {
-   margin: 0;
-   padding: 0;
-   height: 100%;
-   width: 100%;
-}
+
+
 .container{
     display: flex;
     justify-content: center;
