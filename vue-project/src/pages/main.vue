@@ -1,4 +1,9 @@
-<!-- all imports -->
+<!-- all imports 
+and scripts
+
+Need to add a add event listener for enter. 
+if shift and enter then not enter. 
+-->
 
 <template>
 
@@ -12,7 +17,7 @@
         <textarea
         v-model="message" 
         name="mainText" 
-        rows="5" 
+        rows="2" 
         cols="33"
         placeholder="Text here...">
         </textarea>
@@ -22,7 +27,18 @@
 </template>
 
 <style scoped>
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
 
+html, body {
+   margin: 0;
+   padding: 0;
+   height: 100%;
+   width: 100%;
+}
 .container{
     display: flex;
     justify-content: center;
@@ -32,32 +48,36 @@
     background-color: #1a1a1a;
 }
 
-.textplate{
+.textplate {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #ddd;
+    border: 1px solid #444; 
     padding: 8px 16px;
     width: 100%;
     border-radius: 15px;
     max-width: 600px;
-    margin: 20px auto;
     transition: border-color 0.3s;
+    background-color: #2a2a2a; 
 }
 
-.textplate:focus-within{
-    border-color: antiquewhite;
-}
-
-textarea{
+textarea {
     width: 100%;
-    border-radius: 15px;
+    background: transparent; 
+    border: none;           
+    outline: none;           
+    color: white;            
+    font-size: 1.1rem;
+    padding: 10px;
+    resize: none;            
 }
 
-.icon{
-    font: 900;
-    font-size: xx-large;
-
+.icon {
+    color: #888;             
+    font-weight: 900;
+    font-size: 1.5rem;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
 
