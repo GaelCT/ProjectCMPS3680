@@ -4,9 +4,9 @@ header('Access-Control-Allow-Origin: http://davalos.cs3680.com');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Access-Control-Allow-Methods: POST');
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php'; //i added this
 require 'config.php';
-require 'db.php';
+require 'db.php'; // this
 
 use Firebase\JWT\JWT;
 
@@ -33,7 +33,7 @@ try {
         echo json_encode(['error' => 'Invalid email or password']);
         exit;
     }
-
+//This too
 $payload = [
     'iss' => JWT_ISSUER,
     'aud' => JWT_AUDIENCE,
