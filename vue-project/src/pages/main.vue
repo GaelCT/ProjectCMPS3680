@@ -28,6 +28,7 @@ if shift and enter then not enter.
         
         <div class="search">
         <input type="text" placeholder="Search...">
+        <v-btn color="primary" @click="search">Search among us</v-btn>
         <!-- pull js search into here-->
     </div>
     </div>
