@@ -1,10 +1,16 @@
 <?php
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: http://davalos.cs3680.com'); //i changed this from http://localhost:5173 
+header('Access-Control-Allow-Origin: http://davalos.cs3680.com');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Access-Control-Allow-Methods: POST');
 
+require_once __DIR__ . '/vendor/autoload.php';
+require 'config.php';
 require 'db.php';
+
+use Firebase\JWT\JWT;
+
+$tokenSecret = JWT_SECRET;
 
 $data = json_decode(file_get_contents('php://input'), true);
 
@@ -28,14 +34,27 @@ try {
         exit;
     }
 
+$payload = [
+    'iss' => JWT_ISSUER,
+    'aud' => JWT_AUDIENCE,
+    'iat' => time(),
+    'exp' => time() + JWT_EXPIRATION_SECONDS,
+    'user_id' => $user['user_id'],
+    'username' => $user['username'],
+    'email' => $user['email']
+];
+
+    // Added this which generates JWT
+    $token = JWT::encode($payload, $tokenSecret, 'HS256');
+
     echo json_encode([
         'message' => 'Login successful',
         'username' => $user['username'],
-        'userId' => $user['user_id']
+        'userId' => $user['user_id'],
+        'token' => $token
     ]);
 } catch (PDOException $e) {
     http_response_code(500);
     echo json_encode(['error' => 'Server error']);
 }
-
 ?>
