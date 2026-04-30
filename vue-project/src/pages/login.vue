@@ -1,4 +1,5 @@
 <script setup>
+import './login.css'
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -40,6 +41,7 @@ const logIn = async () => {
 
 <template>
     <div class="container">
+        <img src="/DroLogo.png" alt="Dro logo" class="logo">
         <h1>Log In</h1>
         <form @submit.prevent="logIn">
             <label for="email">Email: </label>
