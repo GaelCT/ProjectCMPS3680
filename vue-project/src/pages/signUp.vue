@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const firstName = ref('');
 const lastName = ref('');
 const username = ref('');
@@ -24,11 +26,28 @@ const validateForm = () => {
 }
 
 const signUp = async () => {
-    if (!validateForm()) {
-        return
+    if (!validateForm()) return
+
+    const res = await fetch('/dro/api/signup.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            firstName: firstName.value,
+            lastName: lastName.value,
+            username: username.value,
+            email: email.value,
+            password: password.value
+        })        
+    })
+    const data = await res.json()
+
+    if (res.ok) {
+        alert('Account created! Please log in')
+        router.push('/')
+    } else { 
+        alert (data.error)
     }
 
-    alert("Sign up form submitted")
 }
 </script>
 

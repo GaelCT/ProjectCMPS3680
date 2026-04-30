@@ -1,0 +1,41 @@
+<?php
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: http://davalos.cs3680.com'); //i changed this from http://localhost:5173 
+header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Methods: POST');
+
+require 'db.php';
+
+$data = json_decode(file_get_contents('php://input'), true);
+
+$email = $data['email'] ?? '';
+$password = $data['password'] ?? '';
+
+if (!$email || !$password) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Email and password are required!']);
+    exit;
+}
+
+try {
+    $stmt = $pdo->prepare('SELECT * FROM users WHERE email = ?');
+    $stmt->execute([$email]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$user || !password_verify($password, $user['password_hash'])) {
+        http_response_code(401);
+        echo json_encode(['error' => 'Invalid email or password']);
+        exit;
+    }
+
+    echo json_encode([
+        'message' => 'Login successful',
+        'username' => $user['username'],
+        'userId' => $user['user_id']
+    ]);
+} catch (PDOException $e) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Server error']);
+}
+
+?>
