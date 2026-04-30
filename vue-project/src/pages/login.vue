@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const email = ref('');
 const password = ref('');
 
@@ -16,10 +18,23 @@ const validateForm = () => {
     return true
 }
 
-const logIn = () => {
+const logIn = async () => {
     if (!validateForm()) return
 
-    alert("Form submitted (will do more once backend is working)")
+    const res = await fetch('/dro/api/login.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.value, password: password.value })
+    })
+
+    const data = await res.json()
+
+    if (res.ok) {
+        alert('Welcome ' + data.username)
+        router.push('/main')
+    } else {
+        alert(data.error)
+    }
 }
 </script>
 
