@@ -3,40 +3,75 @@ and scripts
 
 Need to add a add event listener for enter. 
 if shift and enter then not enter. 
+
+
 -->
 
+<script>
+import { useEventSource } from '@vueuse/core';
+import { ref } from 'vue';
+const { status, data, error, close } = useEventSource('/api/sse-endpoint')
+
+//const connection = new EventSource("davalos.cs3680.com/api/sse-endpoint");
+
+</script>
 <template>
+
+<div class="fulltextcontainer">
 
 
 <div class="container">
     <div class="profileLayout">
         <!-- This is where the profile will start -->
-        
     </div>
-
     
+        <div class="textplate">
+            <span class="icon">+</span>
+                <textarea
+                v-model="message" 
+                name="mainText" 
+                rows="2" 
+                cols="33"
+                placeholder="Text here...">
+                </textarea> <!-- can the error go away-->
 
-   <div class="textplate">
-        <span class="icon">+</span>
-        <textarea
-        v-model="message" 
-        name="mainText" 
-        rows="2" 
-        cols="33"
-        placeholder="Text here...">
-        </textarea> <!-- can the error go away-->
-        
-        <div class="search">
-        <input type="text" placeholder="Search...">
-        <!-- pull js search into here-->
+            <div class="search">
+                <input type="text" placeholder="Search...">
+                <!-- pull js search into here-->
+            </div> 
+
+            
     </div>
-    </div>
+    <div class="squareAI">
+        <v-btn class="aiButton" color="primary" @click="search">Summarize</v-btn>
+    </div>  
+</div>
+ 
 </div>
 
 </template>
 
 
 <style>
+.squareAI {
+    display: flex;
+    justify-content: center;
+    color: rgb(186, 198, 20);
+    
+    border: #c44b4b solid 4px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.aibutton {
+    background-color: #c44b4b;
+    color: white;
+    border: cadetblue solid 1px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 html, body {
    margin: 0;
@@ -54,8 +89,6 @@ html, body {
    padding: 0;
    box-sizing: border-box;
 }
-
-
 
 .container{
     display: flex;

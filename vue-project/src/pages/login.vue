@@ -1,4 +1,8 @@
 <script setup>
+<<<<<<< HEAD
+=======
+// import './login.css'
+>>>>>>> 03dcc2fabb6d58cd1b059fb9bd5c5ad674ab13ae
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
@@ -43,6 +47,10 @@ const logIn = async () => {
 
 <template>
     <div class="container">
+<<<<<<< HEAD
+=======
+        <img src="ssh://jescalante/home/jescalante/dro/ProjectCMPS3680/vue-project/src/assets/dro.png" alt="Dro logo" class="logo">
+>>>>>>> 03dcc2fabb6d58cd1b059fb9bd5c5ad674ab13ae
         <h1>Log In</h1>
         <form @submit.prevent="logIn">
             <label for="email">Email: </label>
