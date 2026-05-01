@@ -20,8 +20,6 @@ const users = ref([]);
 const { status, data, error, close } = useEventSource('/api/sse-endpoint');
 
 //const connection = new EventSource("davalos.cs3680.com/api/sse-endpoint");
-
-<<<<<<< HEAD
 onMounted(async () => {
     const token = localStorage.getItem('token')
     if (!token) {
@@ -43,11 +41,7 @@ const logOut = () => {
     localStorage.removeItem('userId')
     router.push('/')
 }
-=======
 
-
-
->>>>>>> 27fb246ecd8b6dd76a0c2c66c1be795df7ffedf0
 </script>
 <template>
 
@@ -136,7 +130,10 @@ html, body {
 .fulltextcontainer {
     display: flex;
     min-height: 100vh;
-    width: 100%;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 .sidebar {
