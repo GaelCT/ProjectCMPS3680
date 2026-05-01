@@ -14,6 +14,9 @@ const { status, data, error, close } = useEventSource('/api/sse-endpoint')
 
 //const connection = new EventSource("davalos.cs3680.com/api/sse-endpoint");
 
+
+
+
 </script>
 <template>
 

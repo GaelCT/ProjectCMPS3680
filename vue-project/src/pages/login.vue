@@ -31,6 +31,9 @@ const logIn = async () => {
     const data = await res.json()
 
     if (res.ok) {
+        localStorage.setItem('token', data.token)
+        localStorage.setItem('username', data.username)
+        localStorage.setItem('userId', data.userId)
         alert('Welcome ' + data.username)
         router.push('/main')
     } else {
@@ -42,6 +45,7 @@ const logIn = async () => {
 <template>
     <img src="@/assets/dro.png" class="top-logo" alt="logo">
     <div class="container">
+
         <h1>Log In</h1>
         <form @submit.prevent="logIn">
             <label for="email">Email: </label>
