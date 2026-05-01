@@ -1,8 +1,5 @@
 <script setup>
-<<<<<<< HEAD
-=======
-// import './login.css'
->>>>>>> 03dcc2fabb6d58cd1b059fb9bd5c5ad674ab13ae
+
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
