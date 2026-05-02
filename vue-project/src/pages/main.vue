@@ -44,7 +44,7 @@ const logOut = () => {
     localStorage.removeItem('userId')
     router.push('/')
 }
-<<<<<<< HEAD
+
 
 
 // Event Source
@@ -61,9 +61,6 @@ EndpointA.onmessage = function(event) {
 
 
 
-=======
-
->>>>>>> cd49daa8593ee8550e81ea806f34c7623653cfc0
 </script>
 <template>
 
