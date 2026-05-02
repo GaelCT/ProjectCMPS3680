@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "@vueuse/core": "^14.3.0",
+<<<<<<< HEAD
     "php": "^1.1.0",
+=======
+>>>>>>> cd49daa8593ee8550e81ea806f34c7623653cfc0
     "vue": "^3.5.32",
     "vue-router": "^4.6.4"
   },

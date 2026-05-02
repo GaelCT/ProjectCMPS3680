@@ -37,6 +37,7 @@ __screenshots__/
 
 # Vite
 *.timestamp-*-*.mjs
+<<<<<<< HEAD
 
 
 #password
@@ -44,3 +45,5 @@ api/stream/password.php
 
 #evn
 *.env 
+=======
+>>>>>>> cd49daa8593ee8550e81ea806f34c7623653cfc0

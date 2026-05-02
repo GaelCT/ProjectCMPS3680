@@ -8,17 +8,26 @@ if shift and enter then not enter.
 -->
 
 <script setup>
+<<<<<<< HEAD
 //both versions were being used . . .
 import { useEventSource } from './node_modules/@vueuse/core'; //used to catch the sse stream with JSON
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import stream from '../stream.php';
+=======
+import { useEventSource } from '@vueuse/core';
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+>>>>>>> cd49daa8593ee8550e81ea806f34c7623653cfc0
 
 const router = useRouter();
 const username = ref('');
 const message = ref('');
 const users = ref([]);
+<<<<<<< HEAD
 const chatHistory = ref([]);
+=======
+>>>>>>> cd49daa8593ee8550e81ea806f34c7623653cfc0
 
 const { status, data, error, close } = useEventSource('/api/sse-endpoint');
 
@@ -45,6 +54,7 @@ const logOut = () => {
     router.push('/')
 }
 
+<<<<<<< HEAD
 
 
 // Event Source
@@ -61,6 +71,8 @@ EndpointA.onmessage = function(event) {
 
 
 
+=======
+>>>>>>> cd49daa8593ee8550e81ea806f34c7623653cfc0
 </script>
 <template>
 
@@ -78,6 +90,7 @@ EndpointA.onmessage = function(event) {
             </div>
         </div>
     </div>
+<<<<<<< HEAD
     <div class="chat-window">
         <div v-for="msg in chatHistory" :key="msg.message_id" class="message-bubble">
           <span class="user">User {{ msg.user_id }}:</span>
@@ -85,6 +98,9 @@ EndpointA.onmessage = function(event) {
           <small class="time">{{ msg.sent_at }}</small>
         </div>
     </div>
+=======
+
+>>>>>>> cd49daa8593ee8550e81ea806f34c7623653cfc0
 
 <div class="container">
     
