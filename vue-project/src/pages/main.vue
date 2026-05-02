@@ -10,11 +10,11 @@ if shift and enter then not enter.
 <script setup>
 
 //both versions were being used . . .
-import { useEventSource } from './node_modules/@vueuse/core'; //used to catch the sse stream with JSON
+ import { useEventSource } from './node_modules/@vueuse/core'; //used to catch the sse stream with JSON
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { vBtn } from 'vuetify/components';
-import enter from '../enter.js';
+// import enter from '../enter.js';
 
 
 const router = useRouter();
@@ -70,26 +70,27 @@ const packageMessageAnduserID = () => {
 }
 //add a function tied to a button
  //probably load the entire thing in a different file
- function enter(){
+ async function enter(){
     try{
-        fetch('davalos.cs3680.com/dro/ProjectCMPS3680/sendMessage.php', {
+        const response = await fetch('https://davalos.cs3680.com/dro/ProjectCMPS3680/sendMessage.php', {
         method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
     },
         body: JSON.stringify(packageMessageAnduserID())
     })
-    .then(response => { if (response.ok) { console.log('Network response was ok'); }
-                            else { console.error('Network response was not ok'); } });
-    .then(response => response.json()) //from raw text to acutal JS object
-    .then(package => { message.value = ''; }) //easiest way to clear it  
-    } catch(error) {
-        console.error('Fetch error:', error);
-    }
-    
-    
-}
+        if (!response.ok) {
+            throw new Error('Network response was not ok'); 
+        }
 
+        const data = await response.json();
+        message.value = '';
+        console.log('Message sent successfully:', data);
+
+        } catch(error) {
+            console.error('Fetch error:', error);
+        }
+    }
 
 
 </script>
@@ -290,4 +291,42 @@ input[type="text"] {
     color: white;
 }
 
+.chat-window {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 20px;
+    gap: 10px;
+    margin-bottom: 120px;
+    background-color: #1a1a1a;
+}
+
+.message-bubble {
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    padding: 10px 14px;
+    max-width: 70%;
+    align-self: flex-start;
+}
+
+.message-bubble .user {
+    color: #888;
+    font-size: 0.75rem;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.message-bubble .text {
+    color: white;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.message-bubble .time {
+    color: #555;
+    font-size: 0.7rem;
+    display: block;
+    margin-top: 4px;
+}
 </style>
