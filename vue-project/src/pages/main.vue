@@ -13,7 +13,9 @@ if shift and enter then not enter.
 import { useEventSource } from './node_modules/@vueuse/core'; //used to catch the sse stream with JSON
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import stream from '../stream.php';
+import { vBtn } from 'vuetify/components';
+import enter from '../enter.js';
+
 
 const router = useRouter();
 const username = ref('');
@@ -48,7 +50,7 @@ const logOut = () => {
 
 
 // Event Source
-const EndpointA = new EventSource('https://jescalante.cs3680.com/stream.php', {
+const EndpointA = new EventSource('https://davalos.cs3680.com/stream.php', {
     withCredentials: true
 });
 
@@ -58,6 +60,35 @@ EndpointA.onmessage = function(event) {
     const incomingMessage = JSON.parse(event.data); // data is JSON so parse it
     chatHistory.value.push(incomingMessage);
 };
+
+const userID = localStorage.getItem('userId');
+const packageMessageAnduserID = () => {
+    return {
+        user_id: userID,
+        content: message.value
+    }
+}
+//add a function tied to a button
+ //probably load the entire thing in a different file
+ function enter(){
+    try{
+        fetch('davalos.cs3680.com/dro/ProjectCMPS3680/sendMessage.php', {
+        method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+    },
+        body: JSON.stringify(packageMessageAnduserID())
+    })
+    .then(response => { if (response.ok) { console.log('Network response was ok'); }
+                            else { console.error('Network response was not ok'); } });
+    .then(response => response.json()) //from raw text to acutal JS object
+    .then(package => { message.value = ''; }) //easiest way to clear it  
+    } catch(error) {
+        console.error('Fetch error:', error);
+    }
+    
+    
+}
 
 
 
@@ -78,7 +109,7 @@ EndpointA.onmessage = function(event) {
             </div>
         </div>
     </div>
-<<<<<<< HEAD
+
     <div class="chat-window">
         <div v-for="msg in chatHistory" :key="msg.message_id" class="message-bubble">
           <span class="user">User {{ msg.user_id }}:</span>
@@ -86,9 +117,6 @@ EndpointA.onmessage = function(event) {
           <small class="time">{{ msg.sent_at }}</small>
         </div>
     </div>
-=======
-
->>>>>>> cd49daa8593ee8550e81ea806f34c7623653cfc0
 
 <div class="container">
     
@@ -106,7 +134,10 @@ EndpointA.onmessage = function(event) {
                 <input type="text" placeholder="Search...">
                 <!-- pull js search into here-->
             </div> 
-
+            <!--reference the previous js file here-->
+            <v-btn color="blue" @click="enter">
+                Send
+            </v-btn>
             
     </div>
     <div class="squareAI">
