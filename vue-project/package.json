@@ -12,7 +12,8 @@
     "@vueuse/core": "^14.3.0",
     "php": "^1.1.0",
     "vue": "^3.5.32",
-    "vue-router": "^4.6.4"
+    "vue-router": "^4.6.4",
+    "vuetify": "^4.0.6"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.6",
