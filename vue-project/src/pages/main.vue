@@ -13,7 +13,7 @@ if shift and enter then not enter.
  //import { useEventSource } from './node_modules/@vueuse/core'; //used to catch the sse stream with JSON
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { vBtn } from 'vuetify/components';
+import { VBtn } from 'vuetify/components';
 // import enter from '../enter.js';
 
 
