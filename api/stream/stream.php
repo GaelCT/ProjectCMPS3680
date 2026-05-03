@@ -5,14 +5,14 @@ header("Access-Control-Allow-Credentials: true");
 header('Content-Type: text/event-stream');
 header('Cache-Control: no-cache');
 header('Connection: keep-alive');
-
+header('')
 require_once('config.php');
-require_once('password.php')
+require_once('loadENV.php');
 //list them all out
-$servername = DB_HOST;
-$username =   DB_USER;
-$password =   DB_PASS; //have this in the .env file
-$dbname =     DB_NAME;
+$servername = $_ENV['server'];
+$username   = $_ENV['user'];
+$password   = $_ENV['pass']; //have this in the .env file
+$dbname     = $_ENV['name'];
 
 function closeConnection($db){
     mysqli_close($db);
