@@ -6,7 +6,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
-    base: '/dro/',
+    base: '/',
     server: {
         allowedHosts: ['jescalante.cs3680.com'],
     },
