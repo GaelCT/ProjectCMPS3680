@@ -8,14 +8,20 @@ if shift and enter then not enter.
 -->
 
 <script setup>
-import { useEventSource } from '@vueuse/core';
+
+//both versions were being used . . .
+ //import { useEventSource } from './node_modules/@vueuse/core'; //used to catch the sse stream with JSON
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { vBtn } from 'vuetify/components';
+// import enter from '../enter.js';
+
 
 const router = useRouter();
 const username = ref('');
 const message = ref('');
 const users = ref([]);
+const chatHistory = ref([]);
 
 const { status, data, error, close } = useEventSource('/api/sse-endpoint');
 
@@ -42,6 +48,51 @@ const logOut = () => {
     router.push('/')
 }
 
+
+// Event Source
+const EndpointA = new EventSource('https://davalos.cs3680.com/stream.php', {
+    withCredentials: true
+});
+
+//onmessage is a event listener for messages
+EndpointA.onmessage = function(event) {
+    console.log('Received data:', event.data);
+    const incomingMessage = JSON.parse(event.data); // data is JSON so parse it
+    chatHistory.value.push(incomingMessage);
+};
+
+const userID = localStorage.getItem('userId');
+const packageMessageAnduserID = () => {
+    return {
+        user_id: userID,
+        content: message.value
+    }
+}
+//add a function tied to a button
+ //probably load the entire thing in a different file
+ async function enter(){
+    try{
+        const response = await fetch('https://davalos.cs3680.com/dro/ProjectCMPS3680/sendMessage.php', {
+        method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+    },
+        body: JSON.stringify(packageMessageAnduserID())
+    })
+        if (!response.ok) {
+            throw new Error('Network response was not ok'); 
+        }
+
+        const data = await response.json();
+        message.value = '';
+        console.log('Message sent successfully:', data);
+
+        } catch(error) {
+            console.error('Fetch error:', error);
+        }
+    }
+
+
 </script>
 <template>
 
@@ -60,6 +111,13 @@ const logOut = () => {
         </div>
     </div>
 
+    <div class="chat-window">
+        <div v-for="msg in chatHistory" :key="msg.message_id" class="message-bubble">
+          <span class="user">User {{ msg.user_id }}:</span>
+          <p class="text">{{ msg.content }}</p>
+          <small class="time">{{ msg.sent_at }}</small>
+        </div>
+    </div>
 
 <div class="container">
     
@@ -77,7 +135,10 @@ const logOut = () => {
                 <input type="text" placeholder="Search...">
                 <!-- pull js search into here-->
             </div> 
-
+            <!--reference the previous js file here-->
+            <v-btn color="blue" @click="enter">
+                Send
+            </v-btn>
             
     </div>
     <div class="squareAI">
@@ -230,4 +291,42 @@ input[type="text"] {
     color: white;
 }
 
+.chat-window {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 20px;
+    gap: 10px;
+    margin-bottom: 120px;
+    background-color: #1a1a1a;
+}
+
+.message-bubble {
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    padding: 10px 14px;
+    max-width: 70%;
+    align-self: flex-start;
+}
+
+.message-bubble .user {
+    color: #888;
+    font-size: 0.75rem;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.message-bubble .text {
+    color: white;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.message-bubble .time {
+    color: #555;
+    font-size: 0.7rem;
+    display: block;
+    margin-top: 4px;
+}
 </style>
