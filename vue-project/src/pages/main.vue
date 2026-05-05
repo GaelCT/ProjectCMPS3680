@@ -12,7 +12,7 @@ if shift and enter then not enter.
 //both versions were being used . . .
  //import { useEventSource } from './node_modules/@vueuse/core'; //used to catch the sse stream with JSON
 import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-ro   uter';
 import { VBtn } from 'vuetify/components';
 // import enter from '../enter.js';
 
@@ -237,30 +237,42 @@ html, body {
     background-color: #444;
 }
 
-.container{
+.container {
     flex: 1;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;      /* changed */
+    justify-content: flex-end;   /* changed - pushes input to bottom */
     min-height: 100vh;
     width: 100%;
     background-color: #1a1a1a;
     position: relative;
+    padding-bottom: 20px;        /* added */
+}
+
+.chat-window {
+    flex: 1;                     /* takes up all space above input */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 20px 20px 20px 20px;
+    gap: 10px;
+    background-color: #1a1a1a;
+    margin-bottom: 0;            /* removed the 120px */
 }
 
 .textplate {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #444; 
+    border: 1px solid #444;
     padding: 8px 16px;
-    width: 100%;
     border-radius: 15px;
     max-width: 600px;
+    width: calc(100% - 40px);   /* changed - respects side padding */
+    margin: 0 auto;              /* changed - centers it */
     transition: border-color 0.3s;
-    background-color: #2a2a2a; 
-    position: absolute;
-    top: 80%;
+    background-color: #2a2a2a;
+    position: static;            /* removed absolute positioning */
 }
 
 textarea {
@@ -289,17 +301,6 @@ input[type="text"] {
     border-radius: 5px;
     background-color: #2a2a2a;
     color: white;
-}
-
-.chat-window {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    padding: 20px;
-    gap: 10px;
-    margin-bottom: 120px;
-    background-color: #1a1a1a;
 }
 
 .message-bubble {

@@ -43,8 +43,9 @@ const logIn = async () => {
 </script>
 
     <template>
+        <div class="login-page">
         <img src="@/assets/dro.png" class="top-logo" alt="logo">
-        <div class="container">
+        <div class="login-container">
 
             <h1>Log In</h1>
             <form @submit.prevent="logIn">
@@ -60,5 +61,6 @@ const logIn = async () => {
                     <button type="button" @click="$router.push('/main')" class="SignUp"> main</button>
             </form>
         </div>
+    </div>
             
     </template>
